@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
 import sqlite3
-import os
 
 
 ### Set window
@@ -13,8 +12,8 @@ root.geometry("350x420")
 database = sqlite3.connect("adresses_database.db")
 i = database.cursor()
 
-if not os.walk("adresses_database.db"):
-    i.execute("""CREATE TABLE addresses (
+try:
+	i.execute("""CREATE TABLE addresses (
                     first_name text,
                     last_name text,
                     address text,
@@ -22,6 +21,8 @@ if not os.walk("adresses_database.db"):
                     state text,
                     zip_code integer
                     )""")
+except Exception as e:
+	pass
 
 
 ### Create functions
